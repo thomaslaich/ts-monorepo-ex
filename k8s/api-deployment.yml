@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: api
+  template:
+    metadata:
+      labels:
+        component: api
+    spec:
+      containers:
+        - name: api
+          image: chickenmelike/hashsum-api
+          ports:
+            - containerPort: 5000
+          env:
+            - name: AMQP_HOST
+              value: redis-cluster-ip-service
+            - name: AMQP_PORT
+              value: "5672"
+              # - name: PGUSER
+              #   value: postgres
+              # - name: PGHOST
+              #   value: postgres-cluster-ip-service
+              # - name: PGDATABASE
+              #   value: postgres
+              # - name: PGPORT
+              #   value: "5432"
+              # - name: PGPASSWORD
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: pgpassword
+              #     key: PGPASSWORD

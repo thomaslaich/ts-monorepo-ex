@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mq
+  template:
+    metadata:
+      labels:
+        component: mq
+    spec:
+      containers:
+        - name: mq
+          image: rabbitmq:3.12.2-alpine
+          ports:
+            - containerPort: 5672

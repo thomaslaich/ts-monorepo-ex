@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: worker-job
+spec:
+  completions: 8
+  parallelism: 2
+  template:
+    metadata:
+      name: worker-job
+    spec:
+      containers:
+        - name: worker
+          image: thomaslaich/hashsum-worker
+          env:
+            - name: BROKER_URL
+              value: amqp://guest:guest@rabbitmq-service:5672
+            - name: QUEUE
+              value: tasks_queue
+      restartPolicy: OnFailure
