@@ -7,9 +7,11 @@ const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 const BATCH_SIZE = 10000;
 
 // TODO use env var
-const PORT = 3001;
+const PORT = 5000;
 
-const uri = "amqp://mq";
+const uri = `amqp://${process.env.AMQP_HOST}`;
+
+console.log("aaah", uri);
 
 let connected = false;
 async function connectToMq() {
@@ -21,7 +23,7 @@ async function connectToMq() {
 
       return channel;
     } catch (e) {
-      console.log("retrying in 1 sec");
+      console.log("retrying in 1 sec", JSON.stringify(e));
     }
     await new Promise<void>((resolve) =>
       setTimeout(() => {
@@ -56,6 +58,10 @@ async function main() {
   const app = express();
   app.use(express.json());
 
+  app.get("/hello", (req, res) => {
+    res.status(200).send("world");
+  });
+
   app.get("/", async (req, res) => {
     const { searchHash, maxLength } = req.query as {
       searchHash: string;
@@ -83,7 +89,6 @@ async function main() {
           reject();
         }, 30000); // max 30 seconds
         channel.consume(sinkQueue, (msg) => {
-          console.log("hallelujah", msg);
           resolve(JSON.parse(msg.content.toString()));
         });
       });

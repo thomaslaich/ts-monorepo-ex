@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: api
-          image: chickenmelike/hashsum-api
+          image: thomaslaich/hashsum-api
           ports:
             - containerPort: 5000
           env:
             - name: AMQP_HOST
-              value: redis-cluster-ip-service
+              value: mq-cluster-ip-service
             - name: AMQP_PORT
               value: "5672"
               # - name: PGUSER
