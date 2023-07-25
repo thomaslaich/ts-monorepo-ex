@@ -1,32 +1,42 @@
-Educational example of a multi-service application in a js monorepo.
+Educational example of a multi-service application in a typescript monorepo.
+
+Application available at:
+multi-container-app-ts.cknlike.com
 
 ## Technologies
 
-- Solid.js frontend with tanstack-query for api fetching
-- An api server (and task orchestrator) using nest.js and ts-rest
-- Kubernetes for orchestration
-- Monorepo tooling using turborepo
+- Monorepo tooling using turborepo and pnpm
+- Docker and Kubernetes for containerization and orchestration
 - Development workflow using Skaffold
-<!-- - Multiple worker types
-  - hashsum worker in Node.js
-  - ... worker in C#/.NET
-  - ... worker in Haskell
-- Calculation service in C++ -->
-<!-- and Bazel -->
+- Sveltekit frontend with tanstack-query for api fetching
+- An api server (and task orchestrator) using nest.js and ts-rest
+- Strongly typed mq with ts-amqp
 
 ## Build and run locally
 
 Build the solution locally:
 
 ```
-npm install
-npm run build
+pnpm install
+pnpm build
 ```
 
-Run the solution locally:
+Deploy locally in production mode:
 
 ```
-npm run deploy
+pnpm localdeploy
+```
+
+Deploy locally using Skaffold and build watchers:
+
+```
+pnpm dev
+```
+
+Ship the application to google cloud (normally done by CI):
+
+```
+pnpm ship
 ```
 
 ## Development workflow

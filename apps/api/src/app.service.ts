@@ -1,10 +1,13 @@
 import { Get, Injectable } from '@nestjs/common';
 import amqp from 'amqplib';
+import { randomUUID } from 'crypto';
+import { ResultMessage, TaskMessage } from '@mono-ex/worker-contract';
+import { z } from 'zod';
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz';
 const BATCH_SIZE = 10000;
 const TIMEOUT = 60000; // 1 minute
-const uri = `amqp://guest:guest@rabbitmq-service:5672`;
+const uri = 'amqp://guest:guest@rabbitmq-service:5672';
 
 let connected = false;
 async function connectToMq() {
@@ -53,7 +56,9 @@ export class AppService {
     searchHash: string;
     maxLength: number;
   }) {
+    const taskId = randomUUID();
     const generatorObj = this.generateTasks(
+      taskId,
       searchHash,
       ALPHABET,
       maxLength,
@@ -71,19 +76,25 @@ export class AppService {
     }
     await this.channel.waitForConfirms();
 
-    const word: { result: string } = await new Promise((resolve, reject) => {
-      setTimeout(() => {
-        reject();
-      }, TIMEOUT);
-      this.channel.consume(this.resultsQueue.queue, (msg) => {
-        if (!msg) {
-          return;
-        }
-        resolve(JSON.parse(msg.content.toString()));
-      });
-    });
+    const result = await new Promise<z.infer<typeof ResultMessage>>(
+      (resolve, reject) => {
+        setTimeout(() => {
+          reject();
+        }, TIMEOUT);
+        this.channel.consume(this.resultsQueue.queue, (msg) => {
+          if (!msg) {
+            return;
+          }
+          resolve(ResultMessage.parse(JSON.parse(msg.content.toString())));
+        });
+      },
+    );
 
-    return word;
+    if (result.taskId === taskId) {
+      return {
+        result: result.originalMessage,
+      };
+    }
   }
 
   @Get()
@@ -92,6 +103,7 @@ export class AppService {
   }
 
   private *generateTasks(
+    taskId: string,
     searchHash: string,
     alphabet: string,
     maxWordLength: number,
@@ -108,12 +120,13 @@ export class AppService {
     let batchStart = 1;
     while (batchStart <= nVariations) {
       const batchEnd = Math.min(batchStart + batchSize - 1, nVariations);
-      yield {
+      yield TaskMessage.parse({
+        taskId,
         searchHash,
         alphabet: alphabet,
         batchStart,
         batchEnd,
-      };
+      });
       batchStart = batchEnd + 1;
     }
   }

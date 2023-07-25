@@ -3,14 +3,14 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**"]
     },
     "deploy": {
-      "dependsOn": ["build", "test", "lint"]
+      "dependsOn": ["build", "test", "lint"],
+      "inputs": ["Dockerfile"]
     },
-    "//#deploy": {},
     "//#applyk8s": {
-      "dependsOn": ["deploy"]
+      "dependsOn": ["@mono-ex/api#deploy", "@mono-ex/worker#deploy"]
     },
     "test": {
       "dependsOn": ["build"],

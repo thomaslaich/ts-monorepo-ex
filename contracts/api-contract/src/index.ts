@@ -6,7 +6,7 @@ const c = initContract();
 export const contract = c.router({
   getHealth: {
     method: 'GET',
-    path: '/health',
+    path: '/',
     responses: {
       200: z.string(),
     },
@@ -24,6 +24,6 @@ export const contract = c.router({
       maxLength: z.number().max(10),
       searchHash: z.string(),
     }),
-    summary: 'Retreve the string that generated the given search hash',
+    summary: 'Retrieve the string that generated the given search hash',
   },
 });

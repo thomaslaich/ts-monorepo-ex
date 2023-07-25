@@ -21,7 +21,7 @@ export function processTask(task: z.infer<typeof TaskMessage>) {
       return {
         taskId: task.taskId,
         searchHash: task.searchHash,
-        word,
+        originalMessage: word,
       };
     }
   }

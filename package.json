@@ -2,12 +2,7 @@
   "name": "hashsum-cracker",
   "version": "1.0.0",
   "description": "(self) educational example of a multi-service application in a monorepo.",
-  "packageManager": "npm@8.19.2",
-  "workspaces": [
-    "apps/*",
-    "contracts/*",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@8.6.10",
   "scripts": {
     "build": "turbo run build",
     "ship": "turbo run applyk8s",

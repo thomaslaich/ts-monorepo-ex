@@ -4,6 +4,8 @@ import { ResultMessage, TaskMessage } from '@mono-ex/worker-contract';
 
 const uri = 'amqp://guest:guest@rabbitmq-service:5672';
 
+const RETRY_WAIT = 5000;
+
 let connected = false;
 async function connectToMq() {
   while (!connected) {
@@ -14,12 +16,13 @@ async function connectToMq() {
 
       return channel;
     } catch (e) {
-      console.log('retrying in 1 sec');
+      const tick = new Date().getTime();
+      console.log(`retrying in ${RETRY_WAIT} sec`);
     }
     await new Promise<void>((resolve) =>
       setTimeout(() => {
         resolve();
-      }, 1000),
+      }, RETRY_WAIT),
     );
   }
 }
@@ -29,6 +32,8 @@ async function main() {
   console.log('worker connected');
 
   channel.consume('tasks_queue', (message) => {
+    const tick = new Date().getTime();
+
     const found = processTask(
       TaskMessage.parse(JSON.parse(message.content.toString())),
     );
