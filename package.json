@@ -4,15 +4,21 @@
   "description": "(self) educational example of a multi-service application in a monorepo.",
   "packageManager": "npm@8.19.2",
   "workspaces": [
-    "packages/*",
-    "apps/*"
+    "apps/*",
+    "contracts/*",
+    "packages/*"
   ],
   "scripts": {
     "build": "turbo run build",
-    "ship": "turbo run deploy",
-    "deploy": "./deploy.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ship": "turbo run applyk8s",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "applyk8s": "./deploy.sh"
   },
   "author": "Thomas Laich",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "1.10.11"
+  }
 }

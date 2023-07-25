@@ -12,8 +12,10 @@
   "author": "Thomas Laich",
   "license": "ISC",
   "dependencies": {
+    "@mono-ex/worker-contract": "*",
     "amqplib": "^0.10.3",
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.1",

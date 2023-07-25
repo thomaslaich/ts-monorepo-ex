@@ -8,13 +8,15 @@
     "deploy": {
       "dependsOn": ["build", "test", "lint"]
     },
-    "//#deploy": {
-      "dependsOn": []
+    "//#deploy": {},
+    "//#applyk8s": {
+      "dependsOn": ["deploy"]
     },
     "test": {
       "dependsOn": ["build"],
       "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
     },
+    "format": {},
     "lint": {},
     "dev": {
       "cache": false,

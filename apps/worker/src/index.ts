@@ -1,9 +1,8 @@
-import amqp from "amqplib";
-import { processTask } from "./process-task";
+import amqp from 'amqplib';
+import { processTask } from './process-task';
+import { ResultMessage, TaskMessage } from '@mono-ex/worker-contract';
 
-const message = process.argv[0];
-
-const uri = "amqp://mq";
+const uri = 'amqp://guest:guest@rabbitmq-service:5672';
 
 let connected = false;
 async function connectToMq() {
@@ -15,24 +14,31 @@ async function connectToMq() {
 
       return channel;
     } catch (e) {
-      console.log("retrying in 1 sec");
+      console.log('retrying in 1 sec');
     }
     await new Promise<void>((resolve) =>
       setTimeout(() => {
         resolve();
-      }, 1000)
+      }, 1000),
     );
   }
 }
 
 async function main() {
   const channel = await connectToMq();
-  console.log("worker connected");
+  console.log('worker connected');
 
-  const found = processTask(JSON.parse(message));
-  if (found) {
-    console.log(`Found! => ${found}`);
-    channel.sendToQueue("sink_queue", Buffer.from(JSON.stringify(found)));
-  }
+  channel.consume('tasks_queue', (message) => {
+    const found = processTask(
+      TaskMessage.parse(JSON.parse(message.content.toString())),
+    );
+    if (found) {
+      console.log(`Found! => ${found}`);
+      channel.sendToQueue(
+        'results_queue',
+        Buffer.from(JSON.stringify(ResultMessage.parse(found))),
+      );
+    }
+  });
 }
 main().catch((err) => console.error(err));

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "esModuleInterop": true
+  }
+}

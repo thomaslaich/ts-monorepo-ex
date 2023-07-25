@@ -1,0 +1,22 @@
+{
+  "name": "eslint-config-custom",
+  "version": "1.0.0",
+  "description": "eslint config used in the entire monorepo",
+  "main": "index.js",
+  "author": "Thomas Laich",
+  "license": "ISC",
+  "scripts": {
+    "format": "prettier --write \"index.js\""
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.59.11",
+    "@typescript-eslint/parser": "^5.59.11",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-turbo": "^1.10.9",
+    "eslint-plugin-prettier": "^4.2.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}
