@@ -12,17 +12,27 @@
   "author": "Thomas Laich",
   "license": "ISC",
   "dependencies": {
+    "@mono-ex/indexed-string-variations": "workspace: *",
     "@mono-ex/worker-contract": "workspace:*",
+    "@nestjs/common": "9.4.3",
+    "@nestjs/core": "9.4.3",
+    "@nestjs/microservices": "9.4.3",
+    "@nestjs/platform-express": "9.4.3",
     "amqplib": "^0.10.3",
-    "crypto": "^1.0.1",
+    "rxjs": "^7.8.1",
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@nestjs/cli": "9.5.0",
+    "@nestjs/schematics": "9.2.0",
+    "@nestjs/testing": "9.4.3",
     "@types/amqplib": "^0.10.1",
     "@types/node": "^20.4.2",
     "concurrently": "^8.2.0",
     "eslint-config-custom": "workspace:*",
     "nodemon": "^3.0.1",
-    "typescript": "^5.1.6"
+    "tsconfig": "workspace:*",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.3"
   }
 }

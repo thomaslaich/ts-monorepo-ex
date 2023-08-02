@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import { contract } from '@mono-ex/api-contract';
@@ -7,19 +7,19 @@ import { contract } from '@mono-ex/api-contract';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @TsRestHandler(contract.getStringFromHashsum)
-  async getStringFromHashsum() {
-    return tsRestHandler(contract.getStringFromHashsum, async ({ body }) => {
-      const result = await this.appService.getStringFromHashsum(body);
-      if (!result) {
-        return { status: 404, body: null };
-      }
-      return { status: 200, body: result };
+  @TsRestHandler(contract)
+  async handler() {
+    return tsRestHandler(contract, {
+      getPreviousResults: async () => {
+        return { status: 200, body: 'world' };
+      },
+      getStringFromHashsum: async ({ body }) => {
+        const result = await this.appService.getStringFromHashsum(body);
+        // if (!result) {
+        //   return { status: 404, body: null };
+        // }
+        return { status: 201, body: null as any };
+      },
     });
-  }
-
-  @Get()
-  getHello() {
-    return 'world';
   }
 }

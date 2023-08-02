@@ -1,17 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CollectorModule } from './collector/collector.module';
+import { ProducerModule } from './producer/producer.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [],
+  imports: [CollectorModule, ProducerModule, PrismaModule],
   controllers: [AppController],
-  providers: [
-    {
-      provide: AppService,
-      useFactory: async () => {
-        return AppService.create();
-      },
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {}

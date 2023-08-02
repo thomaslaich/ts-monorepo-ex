@@ -4,13 +4,13 @@ import { z } from 'zod';
 const c = initContract();
 
 export const contract = c.router({
-  getHealth: {
+  getPreviousResults: {
     method: 'GET',
     path: '/',
     responses: {
       200: z.string(),
     },
-    summary: 'Get server health',
+    summary: 'Get results from previous runs',
   },
   getStringFromHashsum: {
     method: 'POST',
@@ -24,6 +24,6 @@ export const contract = c.router({
       maxLength: z.number().max(10),
       searchHash: z.string(),
     }),
-    summary: 'Retrieve the string that generated the given search hash',
+    summary: 'Post a new hash to be cracked',
   },
 });

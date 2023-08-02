@@ -5,6 +5,7 @@
   "packageManager": "pnpm@8.6.10",
   "scripts": {
     "build": "turbo run build",
+    "dev": "dotenv -- turbo dev",
     "ship": "turbo run applyk8s",
     "lint": "turbo run lint",
     "format": "turbo run format",
@@ -14,6 +15,7 @@
   "author": "Thomas Laich",
   "license": "ISC",
   "devDependencies": {
-    "turbo": "1.10.11"
+    "turbo": "1.10.11",
+    "dotenv-cli": "7.2.1"
   }
 }

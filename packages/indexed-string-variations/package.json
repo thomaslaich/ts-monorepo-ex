@@ -1,0 +1,26 @@
+{
+  "name": "@mono-ex/indexed-string-variations",
+  "version": "1.0.0",
+  "description": "This is pretty much a simplified copy/paste of a library on npm",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "test": "echo \"hello world test\""
+  },
+  "author": "Thomas Laich",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.196",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^2.8.8",
+    "tsconfig": "workspace:*",
+    "typescript": "^5.1.6"
+  }
+}

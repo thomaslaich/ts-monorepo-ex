@@ -1,9 +1,14 @@
 {
+  "extends": "tsconfig/nest.json",
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "baseUrl": "./src",
-    "esModuleInterop": true
-  }
+    "plugins": [{ "name": "api" }],
+    "outDir": "./dist"
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "../../packages/indexed-string-variations/src/index.ts"
+  ]
 }
