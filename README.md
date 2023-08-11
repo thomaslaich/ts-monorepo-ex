@@ -12,9 +12,10 @@ The application is delibarately over-engineered and is meant as a POC for deploy
 
 - Monorepo tooling using turborepo and pnpm
 - Docker and Kubernetes for containerization and orchestration
-- Terraform for cloud resources provisioning
 - Nest.js API server (using ts-rest for contract)
 - Nest.js worker microservice
+- TODO: CI/CD using github actions
+- TODO: Terraform for cloud resources provisioning
 - TODO: Development workflow using Skaffold
 - TODO: Instrumentation using OpenTelemetry
 - TODO: Sveltekit frontend

@@ -19,11 +19,11 @@ spec:
             - containerPort: 5000
           env:
             - name: REDIS_HOST
-              value: mq-cluster-ip-service
+              value: redis-cluster-ip-service
             - name: REDIS_PORT
               value: '6379'
             - name: AMQP_HOST
-              value: mq-cluster-ip-service
+              value: rabbitmq-cluster-ip-service
             - name: AMQP_PORT
               value: '5672'
             - name: PG_USER
@@ -38,4 +38,26 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: pgpassword
-                  key: PGPASSWORD
+                  key: PG_PASSWORD
+            - name: DATABASE_URL
+              value: postgresql://$(PG_USER):$(PG_PASSWORD)@$(PG_HOST):$(PG_PORT)
+      initContainers:
+        - name: api-db-push
+          image: thomaslaich/hashsum-api
+          command: ['npm', 'run', 'db:push']
+          env:
+            - name: PG_USER
+              value: postgres
+            - name: PG_HOST
+              value: postgres-cluster-ip-service
+            - name: PG_DATABASE
+              value: postgres
+            - name: PG_PORT
+              value: '5432'
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PG_PASSWORD
+            - name: DATABASE_URL
+              value: postgresql://$(PG_USER):$(PG_PASSWORD)@$(PG_HOST):$(PG_PORT)

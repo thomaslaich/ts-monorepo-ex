@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ProducerService } from './producer.service';
 import { amqpHost, amqpPort } from '../keys';
+import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
   imports: [
@@ -10,7 +11,6 @@ import { amqpHost, amqpPort } from '../keys';
         name: 'WORKER_SERVICE',
         transport: Transport.RMQ,
         options: {
-          // TODO
           urls: [`amqp://${amqpHost}:${amqpPort}`],
           queue: 'tasks_queue',
           noAck: false,
@@ -20,7 +20,9 @@ import { amqpHost, amqpPort } from '../keys';
         },
       },
     ]),
+    PrismaModule,
   ],
-  controllers: [ProducerService],
+  providers: [ProducerService],
+  exports: [ProducerService],
 })
 export class ProducerModule {}

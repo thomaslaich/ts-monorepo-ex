@@ -1,6 +1,6 @@
 import { ResultMessage } from '@mono-ex/worker-contract';
-import { Inject, Injectable } from '@nestjs/common';
-import { ClientProxy, MessagePattern } from '@nestjs/microservices';
+import { Injectable } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { z } from 'zod';
 import { PrismaService } from '../prisma/prisma.service';
 

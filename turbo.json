@@ -9,16 +9,22 @@
     "PG_HOST",
     "PG_DATABASE",
     "PG_PASSWORD",
-    "PG_PORT"
+    "PG_PORT",
+    "DATABASE_URL"
   ],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "dependsOn": ["db:generate", "^build"]
     },
     "deploy": {
       "dependsOn": ["build", "test", "lint"],
       "inputs": ["Dockerfile"]
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
     },
     "//#applyk8s": {
       "dependsOn": ["@mono-ex/api#deploy", "@mono-ex/worker#deploy"]

@@ -5,6 +5,8 @@ import { generator } from '@mono-ex/indexed-string-variations';
 import { z } from 'zod';
 import { ClientProxy } from '@nestjs/microservices';
 
+// a comment
+
 @Injectable()
 export class AppService {
   constructor(

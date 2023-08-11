@@ -9,9 +9,11 @@ async function bootstrap() {
     {
       transport: Transport.RMQ,
       options: {
-        urls: [`amqp://${amqpHost}:${amqpPort}`],
+        // urls: [`amqp://${amqpHost}:${amqpPort}`],
+        urls: ['lorem'],
         queue: 'tasks_queue',
         noAck: false,
+        noAssert: false,
         queueOptions: {
           durable: false,
         },
