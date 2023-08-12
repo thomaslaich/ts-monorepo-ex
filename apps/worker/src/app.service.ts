@@ -5,8 +5,6 @@ import { generator } from '@mono-ex/indexed-string-variations';
 import { z } from 'zod';
 import { ClientProxy } from '@nestjs/microservices';
 
-// a comment
-
 @Injectable()
 export class AppService {
   constructor(
@@ -28,12 +26,13 @@ export class AppService {
       shasum.update(word);
       const digest = shasum.digest('hex');
       if (digest === task.searchHash) {
-        this.client.send('result', {
+        console.log('sending solution', word);
+        const res = this.client.send('result', {
           taskId: task.taskId,
           searchHash: task.searchHash,
           originalMessage: word,
         });
-        return;
+        return res;
       }
     }
   }

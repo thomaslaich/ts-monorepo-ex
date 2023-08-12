@@ -14,12 +14,11 @@ export class AppController {
         return { status: 200, body: 'world' };
       },
       getStringFromHashsum: async ({ body }) => {
-        await this.appService.getStringFromHashsum(body);
-        // if (!result) {
-        //   return { status: 404, body: null };
-        // }
-        console.log('redirecting');
-        return { status: 303, body: '/' };
+        const result = await this.appService.getStringFromHashsum(body);
+        if (!result) {
+          return { status: 303, body: '/' };
+        }
+        return { status: 200, body: result };
       },
     });
   }

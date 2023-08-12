@@ -43,6 +43,7 @@ WORKDIR /app
 # RUN adduser --system --uid 1001 expressjs
 # USER expressjs
 COPY --from=installer /app .
+
 # cd into the api folder
 WORKDIR /app/apps/api
 

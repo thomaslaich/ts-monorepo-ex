@@ -1,6 +1,5 @@
 import { ResultMessage } from '@mono-ex/worker-contract';
 import { Injectable } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
 import { z } from 'zod';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -8,11 +7,11 @@ import { PrismaService } from '../prisma/prisma.service';
 export class CollectorService {
   constructor(private prismaService: PrismaService) {}
 
-  @MessagePattern('result')
-  public collectResult(result: z.infer<typeof ResultMessage>) {
+  public async collectResult(result: z.infer<typeof ResultMessage>) {
+    console.log('collecting result', result);
     const parsed = ResultMessage.parse(result);
 
-    this.prismaService.hashsumResult.update({
+    await this.prismaService.hashsumResult.update({
       where: {
         searchHash: parsed.searchHash,
       },

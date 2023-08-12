@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { redisHost, redisPort } from './keys';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -17,5 +18,6 @@ import { redisHost, redisPort } from './keys';
     ]),
   ],
   controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

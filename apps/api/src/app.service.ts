@@ -20,7 +20,7 @@ export class AppService {
     searchHash: string;
     maxLength: number;
   }) {
-    this.producerService.sendTasks({
+    return this.producerService.sendTasks({
       searchHash,
       maxLength,
     });

@@ -15,3 +15,12 @@ spec:
       containers:
         - name: worker
           image: thomaslaich/hashsum-worker
+          env:
+            - name: AMQP_HOST
+              value: rabbitmq-cluster-ip-service
+            - name: AMQP_PORT
+              value: '5672'
+            - name: REDIS_HOST
+              value: redis-cluster-ip-service
+            - name: REDIS_PORT
+              value: '6379'

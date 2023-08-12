@@ -28,3 +28,10 @@ spec:
                 name: api-cluster-ip-service
                 port:
                   number: 3001
+          - path: /rabbitmq-management
+            pathType: Prefix
+            backend:
+              service:
+                name: rabbitmq-cluster-ip-service
+                port:
+                  number: 15672

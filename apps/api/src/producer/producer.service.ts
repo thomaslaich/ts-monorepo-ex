@@ -21,6 +21,22 @@ export class ProducerService {
     searchHash: string;
     maxLength: number;
   }) {
+    const existing = await this.prismaService.hashsumResult.findFirst({
+      where: {
+        searchHash,
+      },
+    });
+    if (existing) {
+      console.log('hit');
+      if (existing.completed && existing.originalString) {
+        console.log('full hit');
+        return existing.originalString;
+      } else {
+        console.log('still processing');
+        return null;
+      }
+    }
+
     await this.prismaService.hashsumResult.create({
       data: {
         searchHash,
@@ -37,11 +53,13 @@ export class ProducerService {
       BATCH_SIZE,
     );
 
-    // TODO rxjs somehow?
-    // TODO ack after every message is not very efficient maybe?
+    console.log('sending tasks');
     for (const task of generatorObj) {
-      this.client.send('process_batch', task);
+      const res = this.client.send('process_batch', task);
+      res.subscribe();
     }
+
+    return null;
   }
 
   // TODO use rxjs

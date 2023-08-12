@@ -16,9 +16,8 @@ export const contract = c.router({
     method: 'POST',
     path: '/string-from-hashsum',
     responses: {
-      200: z.object({
-        result: z.string(),
-      }),
+      200: z.string(),
+      303: z.string(),
     },
     body: z.object({
       maxLength: z.number().max(10),

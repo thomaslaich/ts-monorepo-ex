@@ -16,6 +16,7 @@ The application is delibarately over-engineered and is meant as a POC for deploy
 - Nest.js worker microservice
 - TODO: CI/CD using github actions
 - TODO: Terraform for cloud resources provisioning
+- TODO: Replace kubectl yaml with helm
 - TODO: Development workflow using Skaffold
 - TODO: Instrumentation using OpenTelemetry
 - TODO: Sveltekit frontend

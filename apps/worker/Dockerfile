@@ -33,7 +33,7 @@ COPY turbo.json turbo.json
 # ARG TURBO_TOKEN
 # ENV TURBO_TOKEN=$TURBO_TOKEN
 
-RUN turbo run build --filter=worker...
+RUN turbo run build --filter=worker
 
 FROM base AS runner
 WORKDIR /app

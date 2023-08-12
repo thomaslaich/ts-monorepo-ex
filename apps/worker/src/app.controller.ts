@@ -21,7 +21,8 @@ export class AppController {
     const channel = context.getChannelRef();
     const originalMsg = context.getMessage();
 
-    this.appService.processTask(data);
+    const res = this.appService.processTask(data);
+    if (res) res.subscribe();
 
     channel.ack(originalMsg);
   }

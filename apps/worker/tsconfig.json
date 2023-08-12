@@ -1,7 +1,7 @@
 {
   "extends": "tsconfig/nest.json",
   "compilerOptions": {
-    "plugins": [{ "name": "api" }],
+    "plugins": [{ "name": "worker" }],
     "outDir": "./dist"
   },
   "include": [

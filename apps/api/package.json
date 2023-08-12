@@ -6,6 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -33,6 +34,7 @@
     "@ts-rest/nest": "^3.26.4",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
+    "ioredis": "^5.3.2",
     "redis": "^4.6.7",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
