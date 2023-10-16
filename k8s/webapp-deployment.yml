@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: webapp
+  template:
+    metadata:
+      labels:
+        component: webapp
+    spec:
+      containers:
+        - name: webapp
+          image: thomaslaich/hashsum-webapp
+          ports:
+            - containerPort: 4173
+          # env:
+          #   - name: AMQP_HOST
+          #     value: rabbitmq-cluster-ip-service
+          #   - name: AMQP_PORT
+          #     value: '5672'
+          #   - name: REDIS_HOST
+          #     value: redis-cluster-ip-service
+          #   - name: REDIS_PORT
+          #     value: '6379'

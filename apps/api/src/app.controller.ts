@@ -11,7 +11,10 @@ export class AppController {
   async handler() {
     return tsRestHandler(contract, {
       getPreviousResults: async () => {
-        return { status: 200, body: 'world' };
+        return {
+          status: 200,
+          body: `world_${Math.round(Math.random() * 1000)}`,
+        };
       },
       getStringFromHashsum: async ({ body }) => {
         const result = await this.appService.getStringFromHashsum(body);

@@ -13,7 +13,10 @@ async function bootstrap() {
     },
   });
 
+  // TODO investigate why this is necessary
+  app.getHttpAdapter().getInstance().set('etag', false);
+
   await app.startAllMicroservices();
-  await app.listen(3001);
+  await app.listen(5000);
 }
 bootstrap();

@@ -17,7 +17,8 @@
     "strict": true,
     "noFallthroughCasesInSwitch": false,
     "strictNullChecks": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "declaration": true
   },
   "exclude": ["node_modules"]
 }

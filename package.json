@@ -2,7 +2,7 @@
   "name": "hashsum-cracker",
   "version": "1.0.0",
   "description": "(self) educational example of a multi-service application in a monorepo.",
-  "packageManager": "pnpm@8.6.10",
+  "packageManager": "pnpm@8.6.12",
   "scripts": {
     "build": "turbo run build",
     "dev": "dotenv -- turbo dev",

@@ -17,7 +17,7 @@ const getLevel = (base: number, index: number): number => {
 export const defaultAlphabet =
   'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 export function generator(inputAlphabet: string): (index: number) => string {
-  // remove duplicates from alphabets
+  // remove duplicates from alphabet
   const cleanAlphabet = (alphabet: string) => uniq(alphabet.split('')).join('');
 
   const alphabet = inputAlphabet

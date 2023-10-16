@@ -2,10 +2,14 @@
   "name": "@mono-ex/api-contract",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm build:cjs && pnpm build:lib && pnpm build:types",
+    "build:cjs": "swc ./src --config-file .cjs.swcrc -d dist/cjs ",
+    "build:lib": "swc ./src -d dist/mjs",
+    "build:types": "tsc",
     "dev": "tsc --watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
@@ -18,6 +22,8 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.62",
+    "@swc/core": "^1.3.78",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.8.8",
     "tsconfig": "workspace:*",

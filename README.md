@@ -11,6 +11,7 @@ The application is delibarately over-engineered and is meant as a POC for deploy
 ## Technologies
 
 - Monorepo tooling using turborepo and pnpm
+- Nix for reproducible builds and dev environments
 - Docker and Kubernetes for containerization and orchestration
 - Nest.js API server (using ts-rest for contract)
 - Nest.js worker microservice
@@ -30,18 +31,6 @@ Build the solution locally:
 ```
 pnpm install
 pnpm build
-```
-
-Deploy locally in production mode:
-
-```
-pnpm localdeploy
-```
-
-Deploy locally using Skaffold and build watchers:
-
-```
-pnpm dev
 ```
 
 ## Ship the application to production

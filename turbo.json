@@ -27,7 +27,11 @@
       "cache": false
     },
     "//#applyk8s": {
-      "dependsOn": ["@mono-ex/api#deploy", "@mono-ex/worker#deploy"]
+      "dependsOn": [
+        "@mono-ex/api#deploy",
+        "@mono-ex/worker#deploy",
+        "@mono-ex/webapp#deploy"
+      ]
     },
     "test": {
       "dependsOn": ["build"],
