@@ -6,6 +6,7 @@ module.exports = {
     'prettier',
   ],
   plugins: ['@typescript-eslint/eslint-plugin', 'prettier'],
+  parser: '@typescript-eslint/parser',
   root: true,
   env: {
     node: true,

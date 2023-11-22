@@ -1,0 +1,35 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: hashsum-cracker
+build:
+  artifacts:
+    - image: thomaslaich/hashsum-api
+      context: apps/api
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: thomaslaich/hashsum-webapp
+      context: apps/webapp
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+    - image: thomaslaich/hashsum-worker
+      context: apps/worker
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+manifests:
+  rawYaml:
+    - k8s/api-cluster-ip-service.yml
+    - k8s/api-deployment.yml
+    - k8s/database-persistent-volume-claim.yml
+    - k8s/ingress-service.yml
+    - k8s/postgres-cluster-ip-service.yml
+    - k8s/postgres-deployment.yml
+    - k8s/rabbitmq-cluster-ip-service.yml
+    - k8s/rabbitmq-stateful-set.yml
+    - k8s/redis-cluster-ip-service.yml
+    - k8s/redis-deployment.yml
+    - k8s/webapp-cluster-ip-service.yml
+    - k8s/webapp-deployment.yml
+    - k8s/worker-deployment.yml
+deploy:
+  kubectl: {}
